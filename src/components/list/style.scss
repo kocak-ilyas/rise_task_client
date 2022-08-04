@@ -1,0 +1,30 @@
+.containerList {
+  margin: 40px 0px;
+}
+
+.priority {
+  width: 100%;
+}
+
+.priorityItem {
+  width: 90%;
+  font-size: 18px !important;
+  margin: 0px 5% 8px 5%;
+  line-height: 15px !important;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  --bs-dropdown-min-width: 4rem;
+}
+
+.dropdownButton {
+  font-size: 17px;
+  color: black;
+}
+
+.filterList {
+  background-color: #79d9e8;
+  border-radius: 6px;
+  padding: 15px 8px;
+}
