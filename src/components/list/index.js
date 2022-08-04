@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getJobsData, getPriorities } from "../../actions";
+import { getJobsData, getPriorities, deleteJob } from "../../actions";
 
+import { GrEdit } from "react-icons/gr";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 import "./style.scss";
 
 const List = () => {
@@ -13,6 +15,13 @@ const List = () => {
   const [searchValue, setSearchValue] = useState("");
   const [category, setCategory] = useState(null);
   const [currentData, setCurrentData] = useState([]);
+
+  const handleDelete = (jobId) => {
+    dispatch(deleteJob(jobId));
+  };
+  const handleEdit = ({ jobId, jobName, jobPriority }) => {
+    console.log({ jobId, jobName, jobPriority });
+  };
 
   useEffect(() => {
     localStorage.getItem("dataJobs")
@@ -116,16 +125,45 @@ const List = () => {
             <thead>
               <tr>
                 <th scope='col'>Name</th>
-                <th scope='col'>Priority</th>
-                <th scope='col'>Action</th>
+                <th scope='col' style={{ paddingLeft: `5%` }}>
+                  Priority
+                </th>
+                <th scope='col' style={{ paddingLeft: `3%` }}>
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
               {currentData.map(({ jobId, jobName, jobPriority }) => (
                 <tr key={jobId}>
                   <td>{jobName}</td>
-                  <td>{jobPriority}</td>
-                  <td>icons</td>
+                  <td>
+                    <span
+                      className='badge'
+                      style={{
+                        fontSize: "17px",
+                        width: "40%",
+                        color: "black",
+                        border: "none",
+                        backgroundColor: jobPriority === "Önemli" ? "yellow" : jobPriority === "Acil" ? "red" : "blue",
+                      }}>
+                      {jobPriority}
+                    </span>
+                  </td>
+                  <td>
+                    <span
+                      className='listIcon badge text-bg-light'
+                      style={{ cursor: `pointer` }}
+                      onClick={() => handleEdit({ jobId, jobName, jobPriority })}>
+                      <GrEdit size={18} />
+                    </span>
+                    <span
+                      className='listIcon badge text-bg-danger'
+                      style={{ cursor: `pointer` }}
+                      onClick={() => handleDelete(jobId)}>
+                      <RiDeleteBin5Fill size={18} />
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>

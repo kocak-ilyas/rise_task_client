@@ -16,6 +16,11 @@ export const riseReducer = (state = initState, action) => {
       localStorage.setItem("dataJobs", JSON.stringify([...state.jobsData, action.job]));
       return { ...state, jobsData: [...state.jobsData, action.job] };
 
+    case actionTypes.DELETE_JOB:
+      let tempData = state.jobsData.filter(({ jobId }) => jobId !== action.jobId);
+      localStorage.setItem("dataJobs", JSON.stringify(tempData));
+      return { ...state, jobsData: tempData };
+
     default:
       return state;
   }

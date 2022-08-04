@@ -29,3 +29,11 @@ export const createItem =
       console.log(error);
     }
   };
+
+export const deleteJob = (jobId) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.DELETE_JOB, jobId });
+  } catch (error) {
+    console.log(error);
+  }
+};
