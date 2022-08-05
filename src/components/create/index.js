@@ -10,7 +10,7 @@ const Create = () => {
   const priorities = useSelector((state) => state.riseReducer.priorities);
 
   const [name, setName] = useState("");
-  const [priority, setPriority] = useState("Önemli");
+  const [priority, setPriority] = useState("Regular");
   const [isWarn, setIsWarn] = useState(false);
 
   const handleSubmit = () => {
@@ -60,7 +60,7 @@ const Create = () => {
                 className='priority btn dropdown-toggle btn-warning'
                 style={{
                   border: "none",
-                  backgroundColor: priority === "Önemli" ? "yellow" : priority === "Acil" ? "red" : "blue",
+                  backgroundColor: priority === "Regular" ? "yellow" : priority === "Urgent" ? "red" : "blue",
                 }}
                 type='button'
                 data-bs-toggle='dropdown'
@@ -73,9 +73,9 @@ const Create = () => {
                     <li key={item}>
                       <span
                         className={
-                          item === "Önemli"
+                          item === "Regular"
                             ? "badge text-bg-warning priorityItem"
-                            : item === "Acil"
+                            : item === "Urgent"
                             ? "badge text-bg-danger priorityItem"
                             : "badge text-bg-primary priorityItem"
                         }

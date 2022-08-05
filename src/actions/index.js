@@ -37,3 +37,11 @@ export const deleteJob = (jobId) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const editJob = (editItem) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.EDIT_JOB, editItem });
+  } catch (error) {
+    console.log(error);
+  }
+};

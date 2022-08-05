@@ -21,6 +21,21 @@ export const riseReducer = (state = initState, action) => {
       localStorage.setItem("dataJobs", JSON.stringify(tempData));
       return { ...state, jobsData: tempData };
 
+    case actionTypes.EDIT_JOB:
+      let tempArray = state.jobsData.map((item) => {
+        if (item.jobId === action.editItem.jobId) {
+          return (item = {
+            jobId: item.jobId,
+            jobName: item.jobName,
+            jobPriority: action.editItem.jobPriority,
+          });
+        } else {
+          return item;
+        }
+      });
+      localStorage.setItem("dataJobs", JSON.stringify(tempArray));
+      return { ...state, jobsData: tempArray };
+
     default:
       return state;
   }
