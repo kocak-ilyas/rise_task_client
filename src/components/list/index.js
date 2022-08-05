@@ -15,7 +15,9 @@ const List = () => {
 
   const [searchValue, setSearchValue] = useState("");
   const [category, setCategory] = useState(null);
-  const [currentData, setCurrentData] = useState([]);
+  const [currentDataUrgent, setCurrentDataUrgent] = useState([]);
+  const [currentDataRegular, setCurrentDataRegular] = useState([]);
+  const [currentDataTrivial, setCurrentDataTrivial] = useState([]);
   const [deleteItemId, setDeleteItemId] = useState(null);
   const [editItem, setEditItem] = useState({});
 
@@ -42,15 +44,9 @@ const List = () => {
       filteredArray = filteredArray.filter(({ jobName }) => jobName.includes(searchValue));
     }
 
-    // filteredArray = filteredArray.sort((a, b) => {
-    //   return ("" + a.jobName).localeCompare(b.jobName);
-    // });
-    let urgentArray = filteredArray.filter(({ jobPriority }) => jobPriority === "Urgent");
-    let regularArray = filteredArray.filter(({ jobPriority }) => jobPriority === "Regular");
-    let trivialArray = filteredArray.filter(({ jobPriority }) => jobPriority === "Trivial");
-    filteredArray = urgentArray.concat(regularArray, trivialArray);
-
-    setCurrentData(filteredArray);
+    setCurrentDataUrgent(filteredArray.filter(({ jobPriority }) => jobPriority === "Urgent"));
+    setCurrentDataRegular(filteredArray.filter(({ jobPriority }) => jobPriority === "Regular"));
+    setCurrentDataTrivial(filteredArray.filter(({ jobPriority }) => jobPriority === "Trivial"));
   }, [jobsData, searchValue, category]);
 
   return (
@@ -132,7 +128,7 @@ const List = () => {
           </div>
         </div>
       </div>
-      {currentData.length > 0 && (
+      {
         <div className='table-responsive'>
           <table className='table'>
             <thead>
@@ -147,48 +143,136 @@ const List = () => {
               </tr>
             </thead>
             <tbody>
-              {currentData.map(({ jobId, jobName, jobPriority }) => (
-                <tr key={jobId}>
-                  <td>{jobName}</td>
-                  <td>
-                    <span
-                      className='badge'
-                      style={{
-                        fontSize: "17px",
-                        width: "40%",
-                        minWidth: "87px",
-                        color: "black",
-                        border: "none",
-                        backgroundColor:
-                          jobPriority === "Regular" ? "yellow" : jobPriority === "Urgent" ? "red" : "blue",
-                      }}>
-                      {jobPriority}
-                    </span>
-                  </td>
-                  <td>
-                    <span
-                      className='listIcon badge text-bg-light'
-                      style={{ cursor: `pointer` }}
-                      data-bs-toggle='modal'
-                      data-bs-target='#editModal'
-                      onClick={() => setEditItem({ jobId, jobName, jobPriority })}>
-                      <GrEdit size={18} />
-                    </span>
-                    <span
-                      className='listIcon badge text-bg-danger'
-                      style={{ cursor: `pointer` }}
-                      data-bs-toggle='modal'
-                      data-bs-target='#deleteModal'
-                      onClick={() => setDeleteItemId(jobId)}>
-                      <RiDeleteBin5Fill size={18} />
-                    </span>
-                  </td>
-                </tr>
-              ))}
+              {currentDataUrgent
+                .sort((a, b) => {
+                  return ("" + a.jobName).localeCompare(b.jobName);
+                })
+                .map(({ jobId, jobName, jobPriority }) => (
+                  <tr key={jobId}>
+                    <td>{jobName}</td>
+                    <td>
+                      <span
+                        className='badge'
+                        style={{
+                          fontSize: "17px",
+                          width: "40%",
+                          minWidth: "87px",
+                          color: "black",
+                          border: "none",
+                          backgroundColor:
+                            jobPriority === "Regular" ? "yellow" : jobPriority === "Urgent" ? "red" : "blue",
+                        }}>
+                        {jobPriority}
+                      </span>
+                    </td>
+                    <td>
+                      <span
+                        className='listIcon badge text-bg-light'
+                        style={{ cursor: `pointer` }}
+                        data-bs-toggle='modal'
+                        data-bs-target='#editModal'
+                        onClick={() => setEditItem({ jobId, jobName, jobPriority })}>
+                        <GrEdit size={18} />
+                      </span>
+                      <span
+                        className='listIcon badge text-bg-danger'
+                        style={{ cursor: `pointer` }}
+                        data-bs-toggle='modal'
+                        data-bs-target='#deleteModal'
+                        onClick={() => setDeleteItemId(jobId)}>
+                        <RiDeleteBin5Fill size={18} />
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              {currentDataRegular
+                .sort((a, b) => {
+                  return ("" + a.jobName).localeCompare(b.jobName);
+                })
+                .map(({ jobId, jobName, jobPriority }) => (
+                  <tr key={jobId}>
+                    <td>{jobName}</td>
+                    <td>
+                      <span
+                        className='badge'
+                        style={{
+                          fontSize: "17px",
+                          width: "40%",
+                          minWidth: "87px",
+                          color: "black",
+                          border: "none",
+                          backgroundColor:
+                            jobPriority === "Regular" ? "yellow" : jobPriority === "Urgent" ? "red" : "blue",
+                        }}>
+                        {jobPriority}
+                      </span>
+                    </td>
+                    <td>
+                      <span
+                        className='listIcon badge text-bg-light'
+                        style={{ cursor: `pointer` }}
+                        data-bs-toggle='modal'
+                        data-bs-target='#editModal'
+                        onClick={() => setEditItem({ jobId, jobName, jobPriority })}>
+                        <GrEdit size={18} />
+                      </span>
+                      <span
+                        className='listIcon badge text-bg-danger'
+                        style={{ cursor: `pointer` }}
+                        data-bs-toggle='modal'
+                        data-bs-target='#deleteModal'
+                        onClick={() => setDeleteItemId(jobId)}>
+                        <RiDeleteBin5Fill size={18} />
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              {currentDataTrivial
+                .sort((a, b) => {
+                  return ("" + a.jobName).localeCompare(b.jobName);
+                })
+                .map(({ jobId, jobName, jobPriority }) => (
+                  <tr key={jobId}>
+                    <td>{jobName}</td>
+                    <td>
+                      <span
+                        className='badge'
+                        style={{
+                          fontSize: "17px",
+                          width: "40%",
+                          minWidth: "87px",
+                          color: "black",
+                          border: "none",
+                          backgroundColor:
+                            jobPriority === "Regular" ? "yellow" : jobPriority === "Urgent" ? "red" : "blue",
+                        }}>
+                        {jobPriority}
+                      </span>
+                    </td>
+                    <td>
+                      <span
+                        className='listIcon badge text-bg-light'
+                        style={{ cursor: `pointer` }}
+                        data-bs-toggle='modal'
+                        data-bs-target='#editModal'
+                        onClick={() => setEditItem({ jobId, jobName, jobPriority })}>
+                        <GrEdit size={18} />
+                      </span>
+                      <span
+                        className='listIcon badge text-bg-danger'
+                        style={{ cursor: `pointer` }}
+                        data-bs-toggle='modal'
+                        data-bs-target='#deleteModal'
+                        onClick={() => setDeleteItemId(jobId)}>
+                        <RiDeleteBin5Fill size={18} />
+                      </span>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
-      )}
+      }
       <div className='modal fade' id='deleteModal' tabIndex='-1' aria-labelledby='deleteModalLabel' aria-hidden='true'>
         <div className='modal-dialog modal-dialog-centered'>
           <div className='modal-content'>
