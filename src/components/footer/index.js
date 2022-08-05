@@ -5,7 +5,7 @@ import "./style.scss";
 
 const Footer = () => {
   return (
-    <div className='container' style={{ marginTop: `150px` }}>
+    <div className='container' style={{ marginTop: `50px` }}>
       <footer className='py-3 my-4'>
         <ul className='nav justify-content-center border-bottom pb-3 mb-3'>
           <li className='nav-item'>

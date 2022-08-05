@@ -9,8 +9,10 @@ const Navbar = () => {
     <div className='navbarContainer'>
       <PageHeader className='site-page-header'>
         <div className='m-1' style={{ paddingLeft: `5px` }}>
-          <img src={logo} alt='logo' style={{ width: `25px` }} />
-          <span className='titleLogo'>Rise</span>
+          <a href='/' style={{ color: `black`, textDecoration: "none" }}>
+            <img src={logo} alt='logo' style={{ width: `25px` }} />
+            <span className='titleLogo'>Rise</span>
+          </a>
         </div>
       </PageHeader>
     </div>

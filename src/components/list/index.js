@@ -34,12 +34,19 @@ const List = () => {
 
   useEffect(() => {
     let filteredArray = jobsData || [];
+
     if (category) {
       filteredArray = filteredArray.filter(({ jobPriority }) => jobPriority === category);
     }
     if (searchValue !== "") {
       filteredArray = filteredArray.filter(({ jobName }) => jobName.includes(searchValue));
     }
+
+    let urgentArray = filteredArray.filter(({ jobPriority }) => jobPriority === "Urgent");
+    let regularArray = filteredArray.filter(({ jobPriority }) => jobPriority === "Regular");
+    let trivialArray = filteredArray.filter(({ jobPriority }) => jobPriority === "Trivial");
+    filteredArray = urgentArray.concat(regularArray, trivialArray);
+
     setCurrentData(filteredArray);
   }, [jobsData, searchValue, category]);
 
