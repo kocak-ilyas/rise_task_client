@@ -39,6 +39,8 @@ const Create = () => {
               type='text'
               className='form-control'
               id='name'
+              maxLength={255}
+              pattern='[a-zA-Z0-9]+'
               aria-describedby='isWarn'
               onChange={(e) => {
                 setName(e.target.value);

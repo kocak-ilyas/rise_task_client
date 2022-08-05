@@ -42,6 +42,9 @@ const List = () => {
       filteredArray = filteredArray.filter(({ jobName }) => jobName.includes(searchValue));
     }
 
+    // filteredArray = filteredArray.sort((a, b) => {
+    //   return ("" + a.jobName).localeCompare(b.jobName);
+    // });
     let urgentArray = filteredArray.filter(({ jobPriority }) => jobPriority === "Urgent");
     let regularArray = filteredArray.filter(({ jobPriority }) => jobPriority === "Regular");
     let trivialArray = filteredArray.filter(({ jobPriority }) => jobPriority === "Trivial");
@@ -153,6 +156,7 @@ const List = () => {
                       style={{
                         fontSize: "17px",
                         width: "40%",
+                        minWidth: "87px",
                         color: "black",
                         border: "none",
                         backgroundColor:
